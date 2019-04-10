@@ -4,12 +4,12 @@ const path = require('path');
 // update from 23.12.2018
 // const nodeExternals = require('webpack-node-externals');
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // this package prevents the hash updates for some reason
-const WebpackMd5Hash = require("webpack-md5-hash");
+const WebpackMd5Hash = require('webpack-md5-hash');
 
 module.exports = {
   entry: { main: './src/index.js' },
@@ -25,18 +25,17 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        use: [{ loader: 'babel-loader' }, { loader: 'eslint-loader' }]
       },
       {
         test: /\.scss$/,
         use: [
-          "style-loader",
+          'style-loader',
           MiniCssExtractPlugin.loader,
-          "css-loader",
-          "postcss-loader",
-          "sass-loader"
+          'css-loader',
+          // dropping these two to try and get css working before stepping to scss
+          // 'postcss-loader',
+          'sass-loader'
         ]
       }
     ]
@@ -49,9 +48,9 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    // new MiniCssExtractPlugin({
-    //   filename: "style.[contenthash].css"
-    // }),
+    new MiniCssExtractPlugin({
+      filename: 'style.[contenthash].css'
+    }),
     new HtmlWebpackPlugin({
       inject: false,
       hash: true,

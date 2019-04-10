@@ -1,10 +1,17 @@
-import React from "react";
-import { render } from "react-dom";
+import React from 'react';
+import { render } from 'react-dom';
+import Hello from './Hello.js';
+// import './scss/main.scss';
+import './main.css';
 
 class App extends React.Component {
   render() {
-    return <div>'Hello young world.'</div>;
+    return (
+      <div>
+        <Hello hello={'Hello yins.'} />
+      </div>
+    );
   }
 }
 
-render(<App />, document.getElementById("app"));
+render(<App />, document.getElementById('app'));
